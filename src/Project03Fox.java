@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 // Author: Michael Fox
@@ -20,6 +21,10 @@ public class Project03Fox
 
         try
         {
+            //Wonder if a pattern should be used like in concordance.
+            //Also another possibility is to feed line into a CPU object with a regular expression
+            //to populate the member variables within the the object then use a comparator for the
+            //objects.
 
             Files.lines(Paths.get("Project03Data.csv"))
                     .map(line -> line.split("\\s+")) // Stream<String[]>
