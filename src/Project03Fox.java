@@ -1,3 +1,9 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 // Author: Michael Fox
 // Session: Advanced Java
 // Project: Project 3
@@ -11,8 +17,20 @@ public class Project03Fox
      */
     static public void main(String[] args)
     {
-        //This is just a print statement to test to see if the change gets into github
-        System.out.println("Project Place Holder");
+
+        try
+        {
+
+            Files.lines(Paths.get("Project03Data.csv"))
+                    .map(line -> line.split("\\s+")) // Stream<String[]>
+                    .flatMap(Arrays::stream) // Stream<String>
+                    .forEach(System.out::println);
+
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
