@@ -36,6 +36,7 @@ public class CPU
     private void ParseCPULine(String m_strCPULine)
     {
         boolean bRetValue = true;
+        String  strTemp;
 
         //Use a regular expression to parse the line into the individual members
 
@@ -43,9 +44,13 @@ public class CPU
 
         m_strCPUName = tokens[0];
 
+
+//TODO - Figure out why double parse is not working
         //Get the performance
         try
         {
+            strTemp = tokens[1];
+            strTemp.replaceAll("\\D","");  //Get rid of non digit characters
             m_dPerformance = Double.parseDouble(tokens[1]);
         }
         catch(NumberFormatException ex)
@@ -57,6 +62,8 @@ public class CPU
         //Get the price
         try
         {
+            strTemp = tokens[2];
+            strTemp.replaceAll("\\D","");   //Get rid of non digit characters
             m_dPrice = Double.parseDouble(tokens[2]);
         }
         catch(NumberFormatException ex)
