@@ -18,6 +18,7 @@ public class Project03Fox
      */
     static public void main(String[] args)
     {
+        CPUList cpuList = new CPUList();
 
         try
         {
@@ -27,9 +28,11 @@ public class Project03Fox
             //objects.
 
             Files.lines(Paths.get("Project03Data.csv"))
-                    .map(line -> line.split("\\s+")) // Stream<String[]>
+                    .map(line -> line.split("\r\n")) // Stream<String[]>
                     .flatMap(Arrays::stream) // Stream<String>
-                    .forEach(System.out::println);
+                    .forEach(line -> cpuList.AddCpu(line));
+
+            System.out.print(cpuList);
 
 
         } catch (IOException e)
