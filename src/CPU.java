@@ -33,25 +33,27 @@ public class CPU
      * Parse the line into the CPU, Performance, and Price and populate the fields
      * @param m_strCPULine - the input file line to be parsed
      */
-    private void ParseCPULine(String m_strCPULine)
+    private boolean ParseCPULine(String m_strCPULine)
     {
         boolean bRetValue = true;
         String  strTemp;
+        String strNumeric;
 
         //Use a regular expression to parse the line into the individual members
 
+        //TODO - Figure out why regex not working for 1,509.00
+        //messes up on the comma in the value
         String[] tokens = m_strCPULine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
         m_strCPUName = tokens[0];
 
 
-//TODO - Figure out why double parse is not working
         //Get the performance
         try
         {
             strTemp = tokens[1];
-            strTemp.replaceAll("\\D","");  //Get rid of non digit characters
-            m_dPerformance = Double.parseDouble(tokens[1]);
+            strNumeric = strTemp.replaceAll("[^0-9.]+", "");  //Get rid of non digit characters
+            m_dPerformance = Double.parseDouble(strNumeric);
         }
         catch(NumberFormatException ex)
         {
@@ -63,8 +65,8 @@ public class CPU
         try
         {
             strTemp = tokens[2];
-            strTemp.replaceAll("\\D","");   //Get rid of non digit characters
-            m_dPrice = Double.parseDouble(tokens[2]);
+            strNumeric = strTemp.replaceAll("[^0-9.]+", "");   //Get rid of non digit characters
+            m_dPrice = Double.parseDouble(strNumeric);
         }
         catch(NumberFormatException ex)
         {
@@ -72,13 +74,14 @@ public class CPU
             bRetValue = false;
         }
 
-//        for(String strTemp : tokens)
-//        {
-//            System.out.printf("%s\t", strTemp);
-//        }
-//
-//        System.out.printf("\n");
+        for(String strTemp1 : tokens)
+        {
+            System.out.printf("%s\t", strTemp1);
+        }
 
+        System.out.printf("\n");
+
+        return bRetValue;
     }
 
     /**
