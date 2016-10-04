@@ -4,6 +4,9 @@
 // Current Date: 10/3/2016
 // DateDue: 1799.01.01
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 //Class to store the information about the CPU
 public class CPU
 {
@@ -11,6 +14,7 @@ public class CPU
     private String m_strCPUName;
     private double m_dPerformance;
     private double m_dPrice;
+    private Pattern patternNumber;
 
     /**
      * @param strCPULine is the CPU line from the file
@@ -21,11 +25,25 @@ public class CPU
     }
 
     /**
+     * Parse the line into the CPU, Performance, and Price and populate the fields
      * @param m_strCPULine - the input file line to be parsed
      */
     private void ParseCPULine(String m_strCPULine)
     {
-        //TODO - use a regular expression to parse the line into the individual members
+        //Use a regular expression to parse the line into the individual members
+
+        //Split the line into parts using a regular expression
+        Matcher matchFields = patternNumber.matcher(m_strCPULine);
+
+        if(matchFields.find())
+        {
+            m_strCPUName = matchFields.group();
+        }
+        else
+        {
+            m_strCPUName = "???";
+        }
+
     }
 
     /**
