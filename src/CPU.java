@@ -14,7 +14,7 @@ public class CPU
     private String m_strCPUName;
     private double m_dPerformance;
     private double m_dPrice;
-    private Pattern patternNumber;
+    private Pattern patternNumber = Pattern.compile("[0-9]{3,4}");   //TODO find the pattern needed to parse the line using http://rubular.com/
 
     /**
      * @param strCPULine is the CPU line from the file
