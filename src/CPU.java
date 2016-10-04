@@ -4,6 +4,9 @@
 // Current Date: 10/3/2016
 // DateDue: 1799.01.01
 
+//Regular expression input
+// ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)" will pick out the commas only
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +25,8 @@ public class CPU
     public CPU(String strCPULine)
     {
         m_strCPULine = strCPULine;
+
+        ParseCPULine(strCPULine);
     }
 
     /**
@@ -30,19 +35,42 @@ public class CPU
      */
     private void ParseCPULine(String m_strCPULine)
     {
+        boolean bRetValue = true;
+
         //Use a regular expression to parse the line into the individual members
 
-        //Split the line into parts using a regular expression
-        Matcher matchFields = patternNumber.matcher(m_strCPULine);
+        String[] tokens = m_strCPULine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
-        if(matchFields.find())
+        m_strCPUName = tokens[0];
+
+        //Get the performance
+        try
         {
-            m_strCPUName = matchFields.group();
+            m_dPerformance = Double.parseDouble(tokens[1]);
         }
-        else
+        catch(NumberFormatException ex)
         {
-            m_strCPUName = "???";
+            m_dPerformance = -1.0;
+            bRetValue = false;
         }
+
+        //Get the price
+        try
+        {
+            m_dPrice = Double.parseDouble(tokens[2]);
+        }
+        catch(NumberFormatException ex)
+        {
+            m_dPrice = -1.0;
+            bRetValue = false;
+        }
+
+//        for(String strTemp : tokens)
+//        {
+//            System.out.printf("%s\t", strTemp);
+//        }
+//
+//        System.out.printf("\n");
 
     }
 
@@ -51,7 +79,7 @@ public class CPU
      */
     public String toString()
     {
-        //return String.format("%s\t%f\t%f\n", m_strCPUName, m_dPerformance, m_dPrice);
-        return String.format("%s\n", m_strCPULine); //Just return the original line
+        return String.format("%s\t[%f]\t[%f]\n", m_strCPUName, m_dPerformance, m_dPrice);
+        //return String.format("%s\n", m_strCPULine); //Just return the original line
     }
 }
