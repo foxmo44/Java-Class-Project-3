@@ -16,8 +16,10 @@ public class CPU
     private boolean m_bValid;
     private String m_strCPULine;
     private String m_strCPUName;
-    private int m_iPerformance;
+    private double m_dPerformance;
     private double m_dPrice;
+
+
 
     /**
      * @param strCPULine is the CPU line from the file
@@ -51,11 +53,11 @@ public class CPU
         {
             strTemp = tokens[1];
             strNumeric = strTemp.replaceAll("[^0-9.]+", "");  //Get rid of non digit characters
-            m_iPerformance = Integer.parseInt(strNumeric);
+            m_dPerformance = Double.parseDouble(strNumeric);
         }
         catch(NumberFormatException ex)
         {
-            m_iPerformance = -1;
+            m_dPerformance = -1.0;
             bRetValue = false;
         }
 
@@ -87,7 +89,20 @@ public class CPU
      */
     public String toString()
     {
-        return String.format("[%b]\t%s\t\t[%d]\t[%5.2f]\n", m_bValid, m_strCPUName, m_iPerformance, m_dPrice);
+        return String.format("[%b]\t%s\t\t[%5.2f]\t[%5.2f]\n", m_bValid, m_strCPUName, m_dPerformance, m_dPrice);
         //return String.format("%s\n", m_strCPULine); //Just return the original line
     }
+
+    /**
+     * Getter
+     * @return the performance as an double
+     */
+    public double getPerformance(){return(m_dPerformance);};
+
+
+    /**
+     * Getter
+     * @return the price as a double
+     */
+    public double getPrice(){return(m_dPrice);};
 }
