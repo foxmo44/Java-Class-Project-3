@@ -13,9 +13,10 @@ import java.util.regex.Pattern;
 //Class to store the information about the CPU
 public class CPU
 {
+    private boolean m_bValid;
     private String m_strCPULine;
     private String m_strCPUName;
-    private double m_dPerformance;
+    private int m_iPerformance;
     private double m_dPrice;
     private Pattern patternNumber = Pattern.compile("[0-9]{3,4}");   //TODO find the pattern needed to parse the line using http://rubular.com/
 
@@ -25,12 +26,10 @@ public class CPU
     public CPU(String strCPULine)
     {
         m_strCPULine = strCPULine;
-
-        ParseCPULine(strCPULine);
+        m_bValid = ParseCPULine(strCPULine);
     }
 
     /**
-     * Parse the line into the CPU, Performance, and Price and populate the fields
      * @param m_strCPULine - the input file line to be parsed
      */
     private boolean ParseCPULine(String m_strCPULine)
@@ -53,11 +52,11 @@ public class CPU
         {
             strTemp = tokens[1];
             strNumeric = strTemp.replaceAll("[^0-9.]+", "");  //Get rid of non digit characters
-            m_dPerformance = Double.parseDouble(strNumeric);
+            m_iPerformance = Integer.parseInt(strNumeric);
         }
         catch(NumberFormatException ex)
         {
-            m_dPerformance = -1.0;
+            m_iPerformance = -1;
             bRetValue = false;
         }
 
@@ -74,12 +73,12 @@ public class CPU
             bRetValue = false;
         }
 
-        for(String strTemp1 : tokens)
-        {
-            System.out.printf("%s\t", strTemp1);
-        }
-
-        System.out.printf("\n");
+//        for(String strTemp1 : tokens)
+//        {
+//            System.out.printf("%s\t", strTemp1);
+//        }
+//
+//        System.out.printf("\n");
 
         return bRetValue;
     }
@@ -89,7 +88,7 @@ public class CPU
      */
     public String toString()
     {
-        return String.format("%s\t[%f]\t[%f]\n", m_strCPUName, m_dPerformance, m_dPrice);
+        return String.format("[%b]\t%s\t\t[%d]\t[%5.2f]\n", m_bValid, m_strCPUName, m_iPerformance, m_dPrice);
         //return String.format("%s\n", m_strCPULine); //Just return the original line
     }
 }
