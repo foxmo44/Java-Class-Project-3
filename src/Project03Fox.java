@@ -33,6 +33,7 @@ public class Project03Fox
                     .forEach(line -> cpuList.AddCpu(line));
 
             System.out.print(cpuList);
+            System.out.print(cpuList.DetermineStatistics());
 
 
         } catch (IOException e)

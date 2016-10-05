@@ -18,7 +18,6 @@ public class CPU
     private String m_strCPUName;
     private int m_iPerformance;
     private double m_dPrice;
-    private Pattern patternNumber = Pattern.compile("[0-9]{3,4}");   //TODO find the pattern needed to parse the line using http://rubular.com/
 
     /**
      * @param strCPULine is the CPU line from the file
@@ -42,7 +41,7 @@ public class CPU
 
         //TODO - Figure out why regex not working for 1,509.00
         //messes up on the comma in the value
-        String[] tokens = m_strCPULine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+        String[] tokens = m_strCPULine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //http://rubular.com/ is helpful for regex
 
         m_strCPUName = tokens[0];
 

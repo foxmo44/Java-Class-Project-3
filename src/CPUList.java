@@ -39,4 +39,17 @@ public class CPUList
 
         return(strString);
     }
+
+    //Determine the following and return the string indicating the following
+    //        average price of CPU's
+    //        highest priced CPU
+    //        lowest priced CPU
+    //        best value CPU (performance / price )
+    //TODO - Write this function using stream methods
+    public String DetermineStatistics()
+    {
+        String strTemp = "todo";
+
+        return strTemp;
+    }
 }
