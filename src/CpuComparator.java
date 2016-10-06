@@ -15,8 +15,8 @@ public class CpuComparator implements Comparator< CPU >
      */
     public int compare(CPU c1, CPU c2 )
     {
-        double c1Value =  c1.getPerformance() / c1.getPrice();
-        double c2Value = c2.getPerformance() / c2.getPrice();
+        double c1Value =  c1.getValue();
+        double c2Value = c2.getValue();
 
         return (int)(c1Value - c2Value);
     }

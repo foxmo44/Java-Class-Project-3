@@ -18,6 +18,7 @@ public class CPU
     private String m_strCPUName;
     private double m_dPerformance;
     private double m_dPrice;
+    private double m_dValue; //Performance / Price
 
 
 
@@ -74,6 +75,16 @@ public class CPU
             bRetValue = false;
         }
 
+        //If we have valid Performance and Price values then return the calculated value otherwise set to zero
+        if(bRetValue)
+        {
+            m_dValue = m_dPerformance / m_dPrice;
+        }
+        else
+        {
+            m_dValue = 0.0;
+        }
+
 //        for(String strTemp1 : tokens)
 //        {
 //            System.out.printf("%s\t", strTemp1);
@@ -105,4 +116,17 @@ public class CPU
      * @return the price as a double
      */
     public double getPrice(){return(m_dPrice);};
+
+    /**
+     * Getter
+     * @return the value as a double
+     */
+    public double getValue(){return(m_dValue);};
+
+
+    /**
+     * Getter
+     * @return the CPU Name
+     */
+    public String getCpuName(){return(m_strCPUName);};
 }

@@ -22,18 +22,17 @@ public class Project03Fox
 
         try
         {
-            //Wonder if a pattern should be used like in concordance.
-            //Also another possibility is to feed line into a CPU object with a regular expression
-            //to populate the member variables within the the object then use a comparator for the
-            //objects.
 
             Files.lines(Paths.get("Project03Data.csv"))
                     .map(line -> line.split("\r\n")) // Stream<String[]>
                     .flatMap(Arrays::stream) // Stream<String>
                     .forEach(line -> cpuList.AddCpu(line));
 
+            System.out.println("-------------------------------------------");
             System.out.print(cpuList);
-            System.out.print(cpuList.DetermineStatistics());
+            System.out.println("-------------------------------------------");
+            cpuList.PrintStatistics();
+            System.out.println("-------------------------------------------");
 
 
         } catch (IOException e)

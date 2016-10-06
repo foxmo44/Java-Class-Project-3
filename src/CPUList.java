@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.IntStream;
 
 // Author: Michael Fox
@@ -46,12 +47,19 @@ public class CPUList
     //        highest priced CPU
     //        lowest priced CPU
     //        best value CPU (performance / price )
-    //TODO - Write this function using stream methods
-    public String DetermineStatistics()
+
+    /**
+     *  Print the CPU List Statistics
+     *        average price of CPU's
+     *        highest priced CPU
+     *        lowest priced CPU
+     *        best value CPU (performance / price )*
+     */
+    public void  PrintStatistics()
     {
-        String strTemp = "todo";
-
-
-        return strTemp;
+        System.out.printf("average price CPU: %5.2f\n", theList.stream().mapToDouble(CPU::getPrice).average().getAsDouble());
+        System.out.printf("highest price CPU: %5.2f\n", theList.stream().mapToDouble(CPU::getPrice).max().getAsDouble());
+        System.out.printf("lowest price CPU: %5.2f\n", theList.stream().mapToDouble(CPU::getPrice).min().getAsDouble());
+        System.out.println("Best Value CPU: " + Collections.max( theList, new CpuComparator() ).getCpuName());
     }
 }
