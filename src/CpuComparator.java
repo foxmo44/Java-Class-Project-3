@@ -1,10 +1,10 @@
-import java.util.Comparator;
-
 // Author: Michael Fox
 // Session: Advanced Java
 // Project: Project 3
 // Current Date: 10/5/2016
-// DateDue: 1799.01.01
+// DateDue: 2016.10.12
+import java.util.Comparator;
+
 public class CpuComparator implements Comparator< CPU >
 {
     /**

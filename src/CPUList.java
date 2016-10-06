@@ -1,12 +1,14 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.stream.IntStream;
-
 // Author: Michael Fox
 // Session: Advanced Java
 // Project: Project 3
 // Current Date: 10/3/2016
-// DateDue: 1799.01.01
+// DateDue: 2016.10.12
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+
+
 public class CPUList
 {
     ArrayList<CPU> theList = new ArrayList<>();
@@ -42,12 +44,6 @@ public class CPUList
         return(strString);
     }
 
-    //Determine the following and return the string indicating the following
-    //        average price of CPU's
-    //        highest priced CPU
-    //        lowest priced CPU
-    //        best value CPU (performance / price )
-
     /**
      *  Print the CPU List Statistics
      *        average price of CPU's
@@ -61,5 +57,23 @@ public class CPUList
         System.out.printf("highest price CPU: %5.2f\n", theList.stream().mapToDouble(CPU::getPrice).max().getAsDouble());
         System.out.printf("lowest price CPU: %5.2f\n", theList.stream().mapToDouble(CPU::getPrice).min().getAsDouble());
         System.out.println("Best Value CPU: " + Collections.max( theList, new CpuComparator() ).getCpuName());
+    }
+
+    /**
+     * Remove the CPU objects that do not have all of the required values parsed out of the line
+     */
+    public void CleanCpuList()
+    {
+        Iterator<CPU> it = theList.iterator();
+
+        while( it.hasNext() )
+        {
+            CPU objCpu = it.next();
+
+            if(objCpu.getValid() == false)
+            {
+                it.remove();
+            }
+        }
     }
 }

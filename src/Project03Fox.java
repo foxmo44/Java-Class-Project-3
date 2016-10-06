@@ -1,15 +1,14 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
 // Author: Michael Fox
 // Session: Advanced Java
 // Project: Project 3
 // Current Date: 9/25/2016
-// DateDue: 1799.01.01
+// DateDue: 2016.10.12
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+
 public class Project03Fox
 {
     /**
@@ -28,9 +27,15 @@ public class Project03Fox
                     .flatMap(Arrays::stream) // Stream<String>
                     .forEach(line -> cpuList.AddCpu(line));
 
-            System.out.println("-------------------------------------------");
+            //The following will print out the list as loaded with a flag indicating if the line was valid or not
+            //It will then do a clean operation on the list to remove the invalid lines.  It will then do the statistics
+
+            System.out.println("---------------Input-----------------------");
             System.out.print(cpuList);
-            System.out.println("-------------------------------------------");
+            System.out.println("--------------Cleaned----------------------");
+            cpuList.CleanCpuList();
+            System.out.print(cpuList);
+            System.out.println("-------------Statistics--------------------");
             cpuList.PrintStatistics();
             System.out.println("-------------------------------------------");
 

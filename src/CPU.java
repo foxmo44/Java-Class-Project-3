@@ -2,13 +2,12 @@
 // Session: Advanced Java
 // Project: Project 3
 // Current Date: 10/3/2016
-// DateDue: 1799.01.01
+// DateDue: 2016.10.12
 
 //Regular expression input
 // ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)" will pick out the commas only
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 //Class to store the information about the CPU
 public class CPU
@@ -19,7 +18,7 @@ public class CPU
     private double m_dPerformance;
     private double m_dPrice;
     private double m_dValue; //Performance / Price
-
+    private static final double NA_VALUE = 9999.99;
 
 
     /**
@@ -46,8 +45,13 @@ public class CPU
         //messes up on the comma in the value
         String[] tokens = m_strCPULine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //http://rubular.com/ is helpful for regex
 
-        m_strCPUName = tokens[0];
+        //Do we have the correct number of tokens from the split.  If not then mark as invalid
+        if(tokens.length != 3)
+        {
+            bRetValue = false;
+        }
 
+        m_strCPUName = tokens[0];
 
         //Get the performance
         try
@@ -58,7 +62,7 @@ public class CPU
         }
         catch(NumberFormatException ex)
         {
-            m_dPerformance = -1.0;
+            m_dPerformance = NA_VALUE;
             bRetValue = false;
         }
 
@@ -71,7 +75,7 @@ public class CPU
         }
         catch(NumberFormatException ex)
         {
-            m_dPrice = -1.0;
+            m_dPrice = NA_VALUE; //Bogus Value
             bRetValue = false;
         }
 
@@ -129,4 +133,9 @@ public class CPU
      * @return the CPU Name
      */
     public String getCpuName(){return(m_strCPUName);};
+
+    /**
+     * @return if the cpu's line was parsed with all valid values for the fields or not
+     */
+    public boolean getValid(){return(m_bValid);};
 }
